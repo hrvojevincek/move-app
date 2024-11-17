@@ -215,6 +215,10 @@
 }
 
 .carousel-scroll__slide {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
   flex: 0 0 200px;
   min-width: 0;
   position: relative;

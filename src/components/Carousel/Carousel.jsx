@@ -36,7 +36,7 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
   };
 
   const handleMovieClick = (movie) => {
-    navigate(`/${category}/${movie.id}`);
+    navigate(`/details/${movie.id}`);
   };
 
   useEffect(() => {
@@ -73,8 +73,6 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
     };
   }, [movies, hasMore]);
 
-  console.log(movies);
-
   if (loading && movies.length === 0) {
     return <MovieSkeletonRow />;
   }
@@ -84,30 +82,12 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
       <div className="carousel-section">
         <h2>{title}</h2>
         <div className="carousel-wrapper" style={{ position: 'relative' }}>
-          <button
-            className="carousel__arrow carousel__arrow--left"
-            onClick={scrollLeft}
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              zIndex: 10,
-            }}
-          >
+          <button className="carousel__arrow carousel__arrow--left" onClick={scrollLeft}>
             <ChevronLeft size={24} />
           </button>
 
           <div className="carousel-scroll" ref={containerRef} style={{ overflow: 'hidden' }}>
-            <div
-              className="carousel-scroll__container"
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: '1rem',
-                transition: 'transform 0.3s ease',
-              }}
-            >
+            <div className="carousel-scroll__container">
               {movies.map((item) => (
                 <div
                   className="carousel-scroll__slide"
@@ -115,11 +95,6 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
                   onClick={() => handleMovieClick(item)}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handleMovieClick(item);
-                    }
-                  }}
                 >
                   <CarouselCard
                     item={item}
