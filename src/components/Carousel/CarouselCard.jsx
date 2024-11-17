@@ -2,13 +2,19 @@ import React from 'react';
 import { Heart, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const CarouselCard = ({ item, category, isFavorite, toggleFavorite }) => {
+const CarouselCard = ({ item, category, isFavorite, toggleFavorite, onMovieClick }) => {
   const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    if (!e.target.closest('.favorite-btn')) {
+      onMovieClick(item);
+    }
+  };
 
   return (
     <div
       className="carousel__item"
-      onClick={() => navigate(`/details/${item.id}`, { state: { category } })}
+      onClick={handleClick}
       role="button"
       tabIndex={0}
       style={{ cursor: 'pointer' }}

@@ -36,7 +36,9 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
   };
 
   const handleMovieClick = (movie) => {
-    navigate(`/details/${movie.id}`);
+    navigate(`/details/${movie.id}`, {
+      state: { category }, // Pass category in navigation state
+    });
   };
 
   useEffect(() => {
@@ -89,18 +91,13 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
           <div className="carousel-scroll" ref={containerRef} style={{ overflow: 'hidden' }}>
             <div className="carousel-scroll__container">
               {movies.map((item) => (
-                <div
-                  className="carousel-scroll__slide"
-                  key={item.id}
-                  onClick={() => handleMovieClick(item)}
-                  role="button"
-                  tabIndex={0}
-                >
+                <div className="carousel-scroll__slide" key={item.id}>
                   <CarouselCard
                     item={item}
                     category={category}
                     isFavorite={isFavorite}
                     toggleFavorite={toggleFavorite}
+                    onMovieClick={handleMovieClick}
                   />
                 </div>
               ))}

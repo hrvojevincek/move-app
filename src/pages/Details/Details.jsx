@@ -10,6 +10,8 @@ const Details = () => {
   const [item, setItem] = useState(null);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
+  console.log(category);
+
   useEffect(() => {
     const fetchDetails = async () => {
       try {
