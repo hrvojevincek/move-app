@@ -1,0 +1,46 @@
+@use '../../styles/base' as *;
+
+.error-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($background-color, 0.9);
+  z-index: 1000;
+}
+
+.error-content {
+  background-color: $card-background;
+  padding: $spacing-lg;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: $shadow-lg;
+
+  h2 {
+    color: $text-color;
+    margin-bottom: $spacing-md;
+    font-size: 1.5rem;
+  }
+
+  p {
+    color: $text-color;
+    margin-bottom: $spacing-md;
+    opacity: 0.8;
+  }
+
+  button {
+    @include button-base;
+    background-color: $button-primary;
+    color: $text-color;
+
+    &:hover {
+      background-color: $button-primary-hover;
+    }
+  }
+}

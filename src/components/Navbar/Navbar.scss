@@ -1,0 +1,40 @@
+@use '../../styles/base' as *;
+
+.navbar {
+  padding: $spacing-sm 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  &__title {
+    margin: 0 auto;
+    font-family: $font-navbar;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: $spacing-md;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.5em;
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  &__icon {
+    color: $text-color;
+    text-decoration: none;
+    margin-right: $spacing-lg;
+  }
+}
+
+@keyframes slide-bottom {
+  0% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

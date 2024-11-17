@@ -1,0 +1,43 @@
+// Colors
+$primary-color: #032541;
+$secondary-color: #01b4e4;
+$accent-color: #90cea1;
+$text-color: #ffffff;
+$background-color: #000000;
+$card-background: #1a1a1a;
+$overlay-background: rgba(0, 0, 0, 0.2);
+$star-color: #ffd700;
+
+// Button Colors
+$button-primary: #e50914;
+$button-primary-hover: #f40612;
+$button-secondary: #333;
+$button-secondary-hover: #444;
+
+// Fonts
+$font-navbar: 'Doto', sans-serif;
+$font-action: 'Work Sans', sans-serif;
+$font-comedy: 'Comic Neue', cursive;
+$font-scifi: 'Orbitron', sans-serif;
+$font-base: 'Inter', sans-serif;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Shadows
+$shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 6px 8px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+// Transitions
+$transition-base: all 0.3s ease;
