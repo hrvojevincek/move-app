@@ -12,7 +12,7 @@ const Navbar = () => {
         <h1>CINERAMA</h1>
       </Link>
       <Link className="navbar__icon" to="/favourites">
-        <Heart size={32} /> {/* Example icon */}
+        <Heart size={32} />
       </Link>
     </nav>
   );

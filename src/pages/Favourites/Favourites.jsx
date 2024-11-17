@@ -8,14 +8,11 @@ const Favourites = () => {
   const navigate = useNavigate();
 
   const handleMovieClick = (movie) => {
-    navigate(`/details/${movie.id}`, {
-      state: { category: 'action' },
-    });
+    navigate(`/details/${movie.id}`);
   };
 
   return (
     <div className="favourites-container">
-      <h1>My Favourites</h1>
       {favourites.length > 0 ? (
         <div className="favourites-grid">
           {favourites.map((movie) => (

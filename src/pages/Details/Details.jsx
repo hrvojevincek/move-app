@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { getDetails } from '../../services/api';
 import './details.scss';
 import { useFavourites } from '../../hooks/useFavourites';
+import DetailsSkeleton from '../../components/DetailsSkeleton/DetailsSkeleton';
 
 const Details = () => {
   const { id } = useParams();
@@ -32,7 +33,7 @@ const Details = () => {
     }
   };
 
-  if (!item) return <div>Loading...</div>;
+  if (!item) return <DetailsSkeleton category={category} />;
 
   return (
     <div className={`details-container ${category}`}>
