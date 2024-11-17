@@ -98,9 +98,9 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
             <ChevronLeft size={24} />
           </button>
 
-          <div className="embla" ref={containerRef} style={{ overflow: 'hidden' }}>
+          <div className="carousel-scroll" ref={containerRef} style={{ overflow: 'hidden' }}>
             <div
-              className="embla__container"
+              className="carousel-scroll__container"
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -110,7 +110,7 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
             >
               {movies.map((item) => (
                 <div
-                  className="embla__slide"
+                  className="carousel-scroll__slide"
                   key={item.id}
                   onClick={() => handleMovieClick(item)}
                   role="button"
@@ -130,8 +130,8 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
                 </div>
               ))}
               {loading && (
-                <div className="embla-infinite-scroll embla-infinite-scroll--loading-more">
-                  <span className="embla-infinite-scroll__spinner" />
+                <div className="carousel-loader carousel-loader--loading-more">
+                  <span className="carousel-loader__spinner" />
                 </div>
               )}
             </div>

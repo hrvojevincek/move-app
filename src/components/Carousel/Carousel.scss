@@ -201,26 +201,26 @@
   }
 }
 
-.embla {
+.carousel-scroll {
   overflow-x: auto;
   width: 100%;
   flex: 1;
 }
 
-.embla__container {
+.carousel-scroll__container {
   display: flex;
   gap: $spacing-sm;
   padding: $spacing-md 0;
   width: max-content;
 }
 
-.embla__slide {
+.carousel-scroll__slide {
   flex: 0 0 200px;
   min-width: 0;
   position: relative;
 }
 
-.embla-infinite-scroll {
+.carousel-loader {
   display: flex;
   align-items: center;
   justify-content: center;
