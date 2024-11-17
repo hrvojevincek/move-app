@@ -63,6 +63,11 @@
       margin-bottom: $spacing-md;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    width: 70%;
+    margin: 0 auto;
+  }
 }
 
 .remove-btn {
