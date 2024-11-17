@@ -37,7 +37,7 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
 
   const handleMovieClick = (movie) => {
     navigate(`/details/${movie.id}`, {
-      state: { category }, // Pass category in navigation state
+      state: { category },
     });
   };
 
@@ -58,19 +58,19 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
 
     observerRef.current = observer;
     return () => observer.disconnect();
-  }, [loading, hasMore, page]);
+  }, [loading, hasMore, page, fetchMoreMovies]);
 
   useEffect(() => {
     const observer = observerRef.current;
-    const lastElement = containerRef.current?.querySelector('.embla__slide:last-child');
+    const sentinelElement = containerRef.current?.querySelector('.carousel-scroll__sentinel');
 
-    if (lastElement && observer && hasMore) {
-      observer.observe(lastElement);
+    if (sentinelElement && observer && hasMore) {
+      observer.observe(sentinelElement);
     }
 
     return () => {
-      if (lastElement && observer) {
-        observer.unobserve(lastElement);
+      if (sentinelElement && observer) {
+        observer.unobserve(sentinelElement);
       }
     };
   }, [movies, hasMore]);
@@ -88,7 +88,7 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
             <ChevronLeft size={24} />
           </button>
 
-          <div className="carousel-scroll" ref={containerRef} style={{ overflow: 'hidden' }}>
+          <div className="carousel-scroll" ref={containerRef} style={{ overflow: 'auto' }}>
             <div className="carousel-scroll__container">
               {movies.map((item) => (
                 <div className="carousel-scroll__slide" key={item.id}>
@@ -100,6 +100,18 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
                   />
                 </div>
               ))}
+              {hasMore && (
+                <div
+                  className="carousel-scroll__sentinel"
+                  style={{
+                    width: '1px',
+                    height: '100%',
+                    position: 'absolute',
+                    right: '100px',
+                    top: 0,
+                  }}
+                />
+              )}
               {loading && (
                 <div className="carousel-loader carousel-loader--loading-more">
                   <span className="carousel-loader__spinner" />
