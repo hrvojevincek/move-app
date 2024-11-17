@@ -42,6 +42,12 @@ const Details = () => {
   return (
     <div className={`details-container ${category}`}>
       <div className="details-content">
+        <div className="details-image">
+          <img
+            src={`https://image.tmdb.org/t/p/w500${item.poster_path || item.profile_path}`}
+            alt={item.title || item.name}
+          />
+        </div>
         <div className="details-info">
           <h1>{item.title || item.name}</h1>
           <p className="overview">{item.overview || item.biography}</p>
@@ -53,12 +59,6 @@ const Details = () => {
               Back
             </button>
           </div>
-        </div>
-        <div className="details-image">
-          <img
-            src={`https://image.tmdb.org/t/p/w500${item.poster_path || item.profile_path}`}
-            alt={item.title || item.name}
-          />
         </div>
       </div>
     </div>
