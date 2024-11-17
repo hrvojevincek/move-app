@@ -94,7 +94,6 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
                 <div className="carousel-scroll__slide" key={item.id}>
                   <CarouselCard
                     item={item}
-                    category={category}
                     isFavorite={isFavorite}
                     toggleFavorite={toggleFavorite}
                     onMovieClick={handleMovieClick}

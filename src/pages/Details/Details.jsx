@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDetails } from '../../services/api';
 import './details.scss';
+import { useFavourites } from '../../hooks/useFavourites';
 
 const Details = () => {
   const { id } = useParams();
   const location = useLocation();
   const category = location.state?.category || 'action';
   const [item, setItem] = useState(null);
-  const [isInWishlist, setIsInWishlist] = useState(false);
-
-  console.log(category);
+  const { isInFavourites, addToFavourites, removeFromFavourites } = useFavourites();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -26,15 +25,11 @@ const Details = () => {
   }, [id]);
 
   const handleWishlist = () => {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-    if (!isInWishlist) {
-      wishlist.push({ ...item });
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    if (!isInFavourites(item.id)) {
+      addToFavourites(item);
     } else {
-      const updatedWishlist = wishlist.filter((wishItem) => wishItem.id !== item.id);
-      localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+      removeFromFavourites(item.id);
     }
-    setIsInWishlist(!isInWishlist);
   };
 
   if (!item) return <div>Loading...</div>;
@@ -53,7 +48,7 @@ const Details = () => {
           <p className="overview">{item.overview || item.biography}</p>
           <div className="button-group">
             <button className="wishlist-btn" onClick={handleWishlist}>
-              {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+              {isInFavourites(item.id) ? 'Remove from Favourites' : 'Add to Favourites'}
             </button>
             <button className="back-btn" onClick={() => window.history.back()}>
               Back

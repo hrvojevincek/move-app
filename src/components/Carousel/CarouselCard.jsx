@@ -1,13 +1,24 @@
-import React from 'react';
 import { Heart, Star } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useFavourites } from '../../hooks/useFavourites';
 
-const CarouselCard = ({ item, category, isFavorite, toggleFavorite, onMovieClick }) => {
-  const navigate = useNavigate();
+const CarouselCard = ({ item, onMovieClick }) => {
+  const { isInFavourites, addToFavourites, removeFromFavourites } = useFavourites();
 
   const handleClick = (e) => {
     if (!e.target.closest('.favorite-btn')) {
       onMovieClick(item);
+    }
+  };
+
+  const handleFavoriteClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isInFavourites(item.id)) {
+      removeFromFavourites(item.id);
+    } else {
+      addToFavourites(item);
     }
   };
 
@@ -38,9 +49,9 @@ const CarouselCard = ({ item, category, isFavorite, toggleFavorite, onMovieClick
             </div>
           </div>
           <button
-            className={`favorite-btn ${isFavorite[item.id] ? 'active' : ''}`}
-            onClick={(e) => toggleFavorite(item.id, e)}
-            aria-label={`${isFavorite[item.id] ? 'Remove from favorites' : 'Add to favorites'}`}
+            className={`favorite-btn ${isInFavourites(item.id) ? 'active' : ''}`}
+            onClick={handleFavoriteClick}
+            aria-label={`${isInFavourites(item.id) ? 'Remove from favorites' : 'Add to favorites'}`}
           >
             <Heart size={20} />
           </button>
