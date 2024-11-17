@@ -1,7 +1,8 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import CarouselCard from './CarouselCard';
 import { useNavigate } from 'react-router-dom';
+import MovieSkeletonRow from '../Skeleton/MovieSkeleton';
 
 import './Carousel.scss';
 const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, page }) => {
@@ -73,6 +74,10 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
   }, [movies, hasMore]);
 
   console.log(movies);
+
+  if (loading && movies.length === 0) {
+    return <MovieSkeletonRow />;
+  }
 
   return (
     <div className={`carousel-container--${category}`}>

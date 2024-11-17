@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { getActionMovies, getComedyMovies, getSciFiMovies } from '../../services/api';
 import { useActionMovies } from '../../hooks/useActionMovies';
 import { useComedyMovies } from '../../hooks/useComedyMovies';
 import { useSciFiMovies } from '../../hooks/useSciFiMovies';
 import Carousel from './Carousel';
+import MovieSkeletonRow from '../Skeleton/MovieSkeleton';
 
 const MovieCarousel = () => {
   const {
@@ -36,36 +37,44 @@ const MovieCarousel = () => {
 
   return (
     <div className="movie-carousels">
-      <Carousel
-        category="action"
-        title="Action Movies"
-        fetchFunction={getActionMovies}
-        movies={actionMovies}
-        loading={actionLoading}
-        hasMore={actionHasMore}
-        fetchMoreMovies={fetchMoreActionMovies}
-        page={actionPage}
-      />
-      <Carousel
-        category="comedy"
-        title="Comedy Movies"
-        fetchFunction={getComedyMovies}
-        movies={comedyMovies}
-        loading={comedyLoading}
-        hasMore={comedyHasMore}
-        fetchMoreMovies={fetchMoreComedyMovies}
-        page={comedyPage}
-      />
-      <Carousel
-        category="scifi"
-        title="Sci-Fi Movies"
-        fetchFunction={getSciFiMovies}
-        movies={scifiMovies}
-        loading={scifiLoading}
-        hasMore={scifiHasMore}
-        fetchMoreMovies={fetchMoreScifiMovies}
-        page={scifiPage}
-      />
+      <Suspense fallback={<MovieSkeletonRow />}>
+        <Carousel
+          category="action"
+          title="Action Movies"
+          fetchFunction={getActionMovies}
+          movies={actionMovies}
+          loading={actionLoading}
+          hasMore={actionHasMore}
+          fetchMoreMovies={fetchMoreActionMovies}
+          page={actionPage}
+        />
+      </Suspense>
+
+      <Suspense fallback={<MovieSkeletonRow />}>
+        <Carousel
+          category="comedy"
+          title="Comedy Movies"
+          fetchFunction={getComedyMovies}
+          movies={comedyMovies}
+          loading={comedyLoading}
+          hasMore={comedyHasMore}
+          fetchMoreMovies={fetchMoreComedyMovies}
+          page={comedyPage}
+        />
+      </Suspense>
+
+      <Suspense fallback={<MovieSkeletonRow />}>
+        <Carousel
+          category="scifi"
+          title="Sci-Fi Movies"
+          fetchFunction={getSciFiMovies}
+          movies={scifiMovies}
+          loading={scifiLoading}
+          hasMore={scifiHasMore}
+          fetchMoreMovies={fetchMoreScifiMovies}
+          page={scifiPage}
+        />
+      </Suspense>
     </div>
   );
 };
