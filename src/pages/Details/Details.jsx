@@ -10,15 +10,25 @@ const Details = () => {
   const location = useLocation();
   const category = location.state?.category || 'action';
   const [item, setItem] = useState(null);
+  const [error, setError] = useState(null);
   const { isInFavourites, addToFavourites, removeFromFavourites } = useFavourites();
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const response = await getDetails(id);
+        console.log(response);
+        if (!response.data) {
+          setError(new Error('Item not found'));
+          return;
+        }
         setItem(response.data);
       } catch (error) {
-        console.error('Error fetching details:', error);
+        setError(
+          new Error(
+            "Unable to find the requested item. It might have been removed or doesn't exist."
+          )
+        );
       }
     };
 
@@ -32,6 +42,10 @@ const Details = () => {
       removeFromFavourites(item.id);
     }
   };
+
+  if (error) {
+    throw error;
+  }
 
   if (!item) return <DetailsSkeleton category={category} />;
 

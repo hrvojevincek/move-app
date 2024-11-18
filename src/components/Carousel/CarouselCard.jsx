@@ -1,15 +1,10 @@
 import { Heart, Star } from 'lucide-react';
 import React from 'react';
 import { useFavourites } from '../../hooks/useFavourites';
+import { Link } from 'react-router-dom';
 
-const CarouselCard = ({ item, onMovieClick }) => {
+const CarouselCard = ({ item, category }) => {
   const { isInFavourites, addToFavourites, removeFromFavourites } = useFavourites();
-
-  const handleClick = (e) => {
-    if (!e.target.closest('.favorite-btn')) {
-      onMovieClick(item);
-    }
-  };
 
   const handleFavoriteClick = (e) => {
     e.preventDefault();
@@ -23,12 +18,13 @@ const CarouselCard = ({ item, onMovieClick }) => {
   };
 
   return (
-    <div
+    <Link
+      to={`/details/${item.id}`}
+      state={{ category }}
       className="carousel__item"
-      onClick={handleClick}
       role="button"
       tabIndex={0}
-      style={{ cursor: 'pointer' }}
+      data-testid="carousel-item"
     >
       <div className="carousel__item-content">
         <img
@@ -57,7 +53,7 @@ const CarouselCard = ({ item, onMovieClick }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -38,7 +38,7 @@ describe('MovieCarousel Integration', () => {
     Element.prototype.scrollBy = jest.fn();
   });
 
-  test.skip('loads and displays movies from all genres', async () => {
+  test('loads and displays movies from all genres', async () => {
     await act(async () => {
       render(
         <BrowserRouter>
@@ -57,7 +57,7 @@ describe('MovieCarousel Integration', () => {
     expect(getSciFiMovies).toHaveBeenCalledWith(1);
   });
 
-  test.skip('navigation controls work correctly', async () => {
+  test('navigation controls work correctly', async () => {
     await act(async () => {
       render(
         <BrowserRouter>
@@ -90,7 +90,7 @@ describe('MovieCarousel Integration', () => {
     });
   });
 
-  test.skip('handles API errors gracefully', async () => {
+  test('handles API errors gracefully', async () => {
     // Mock API errors
     getActionMovies.mockRejectedValue(new Error('API Error'));
     getComedyMovies.mockRejectedValue(new Error('API Error'));
@@ -116,6 +116,43 @@ describe('MovieCarousel Integration', () => {
     });
   });
 
+  test('previous buttons work correctly', async () => {
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <MovieCarousel />
+        </BrowserRouter>
+      );
+    });
+
+    await waitFor(() => {
+      const prevButtons = screen.getAllByLabelText('Previous movies');
+      expect(prevButtons).toHaveLength(3);
+    });
+
+    const prevButtons = screen.getAllByLabelText('Previous movies');
+
+    // Click next first to enable previous buttons
+    const nextButtons = screen.getAllByLabelText('Next movies');
+    await act(async () => {
+      nextButtons.forEach((button) => fireEvent.click(button));
+    });
+
+    // Then click previous
+    await act(async () => {
+      prevButtons.forEach((button) => fireEvent.click(button));
+    });
+
+    expect(Element.prototype.scrollBy).toHaveBeenCalledTimes(6);
+
+    // Verify API calls return to page 1
+    await waitFor(() => {
+      expect(getActionMovies).toHaveBeenCalledWith(1);
+      expect(getComedyMovies).toHaveBeenCalledWith(1);
+      expect(getSciFiMovies).toHaveBeenCalledWith(1);
+    });
+  });
+
   test('movie cards are clickable and navigate correctly', async () => {
     await act(async () => {
       render(
@@ -130,7 +167,8 @@ describe('MovieCarousel Integration', () => {
       expect(movieCards).toHaveLength(6); // 2 movies × 3 genres
 
       movieCards.forEach((card) => {
-        expect(card).toHaveAttribute('href', expect.stringMatching(/^\/movie\/\d+$/));
+        expect(card).toHaveAttribute('href', expect.stringMatching(/^\/details\/\d+$/));
+        expect(card).toHaveAttribute('role', 'button');
       });
     });
   });

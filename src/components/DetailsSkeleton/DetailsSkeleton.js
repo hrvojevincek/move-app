@@ -1,7 +1,8 @@
 import React from 'react';
 import './Skeleton.scss';
+
 const DetailsSkeleton = ({ category }) => (
-  <div className={`details-container ${category}`}>
+  <div className={`details-container ${category}`} data-testid="details-skeleton">
     <div className="details-content">
       <div className="details-image">
         <div className="skeleton-image pulse"></div>

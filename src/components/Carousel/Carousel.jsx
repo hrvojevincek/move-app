@@ -1,12 +1,10 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import MovieSkeletonRow from '../Skeleton/MovieSkeleton';
 import CarouselCard from './CarouselCard';
 
 import './Carousel.scss';
 const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, page }) => {
-  const navigate = useNavigate();
   const containerRef = useRef(null);
   const observerRef = useRef(null);
   const [isFavorite, setIsFavorite] = useState({});
@@ -33,12 +31,6 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
     e.preventDefault();
     e.stopPropagation();
     setIsFavorite((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const handleMovieClick = (movie) => {
-    navigate(`/details/${movie.id}`, {
-      state: { category },
-    });
   };
 
   useEffect(() => {
@@ -100,7 +92,7 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
                     item={item}
                     isFavorite={isFavorite}
                     toggleFavorite={toggleFavorite}
-                    onMovieClick={handleMovieClick}
+                    category={category}
                   />
                 </div>
               ))}

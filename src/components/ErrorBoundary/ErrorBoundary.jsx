@@ -18,7 +18,12 @@ class ErrorBoundary extends React.Component {
           <div className="error-content">
             <h2>Something went wrong!</h2>
             <p>{this.state.error.message}</p>
-            <button onClick={() => window.location.reload()}>Try again</button>
+            <button className="error-button" onClick={() => window.location.reload()}>
+              Try again
+            </button>
+            <button className="error-button" onClick={() => (window.location.href = '/')}>
+              Go to home
+            </button>
           </div>
         </div>
       );
