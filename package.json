@@ -54,7 +54,7 @@
     "identity-obj-proxy": "^3.0.0"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"
     ],

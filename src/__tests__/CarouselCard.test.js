@@ -41,7 +41,7 @@ describe('CarouselCard Component', () => {
   test('calls onMovieClick when clicking the card', () => {
     render(<CarouselCard item={mockItem} onMovieClick={mockOnMovieClick} />);
 
-    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByTestId('carousel-item'));
     expect(mockOnMovieClick).toHaveBeenCalledWith(mockItem);
   });
 });

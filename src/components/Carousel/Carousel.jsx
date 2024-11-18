@@ -1,8 +1,8 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React, { useEffect, useRef, useState, Suspense } from 'react';
-import CarouselCard from './CarouselCard';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MovieSkeletonRow from '../Skeleton/MovieSkeleton';
+import CarouselCard from './CarouselCard';
 
 import './Carousel.scss';
 const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, page }) => {
@@ -84,12 +84,16 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
       <div className="carousel-section">
         <h2>{title}</h2>
         <div className="carousel-wrapper" style={{ position: 'relative' }}>
-          <button className="carousel__arrow carousel__arrow--left" onClick={scrollLeft}>
+          <button
+            className="carousel__arrow carousel__arrow--left"
+            onClick={scrollLeft}
+            aria-label="Previous movies"
+          >
             <ChevronLeft size={24} />
           </button>
 
           <div className="carousel-scroll" ref={containerRef} style={{ overflow: 'auto' }}>
-            <div className="carousel-scroll__container">
+            <div className="carousel-scroll__container" data-testid="carousel-scroll__container">
               {movies.map((item) => (
                 <div className="carousel-scroll__slide" key={item.id}>
                   <CarouselCard
@@ -120,7 +124,11 @@ const Carousel = ({ category, title, movies, loading, hasMore, fetchMoreMovies, 
             </div>
           </div>
 
-          <button className="carousel__arrow carousel__arrow--right" onClick={scrollRight}>
+          <button
+            className="carousel__arrow carousel__arrow--right"
+            onClick={scrollRight}
+            aria-label="Next movies"
+          >
             <ChevronRight size={24} />
           </button>
         </div>
