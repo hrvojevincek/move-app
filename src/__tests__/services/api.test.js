@@ -15,7 +15,7 @@ describe('API Instance', () => {
   });
 
   test('axios.create is called with correct config', () => {
-    require('../services/api');
+    require('../../services/api');
 
     expect(axios.create).toHaveBeenCalledWith({
       baseURL: 'https://api.themoviedb.org/3',
@@ -27,7 +27,7 @@ describe('API Instance', () => {
   });
 
   test('getActionMovies calls api.get with correct parameters', async () => {
-    const { getActionMovies } = require('../services/api');
+    const { getActionMovies } = require('../../services/api');
     const mockResponse = { data: { results: [] } };
     mockGet.mockResolvedValueOnce(mockResponse);
 
@@ -42,7 +42,7 @@ describe('API Instance', () => {
   });
 
   test('getComedyMovies calls api.get with correct parameters', async () => {
-    const { getComedyMovies } = require('../services/api');
+    const { getComedyMovies } = require('../../services/api');
     const mockResponse = { data: { results: [] } };
     mockGet.mockResolvedValueOnce(mockResponse);
 
@@ -57,7 +57,7 @@ describe('API Instance', () => {
   });
 
   test('getSciFiMovies calls api.get with correct parameters', async () => {
-    const { getSciFiMovies } = require('../services/api');
+    const { getSciFiMovies } = require('../../services/api');
     const mockResponse = { data: { results: [] } };
     mockGet.mockResolvedValueOnce(mockResponse);
 
@@ -72,7 +72,7 @@ describe('API Instance', () => {
   });
 
   test('getDetails calls api.get with correct parameters', async () => {
-    const { getDetails } = require('../services/api');
+    const { getDetails } = require('../../services/api');
     const mockResponse = { data: {} };
     mockGet.mockResolvedValueOnce(mockResponse);
 
